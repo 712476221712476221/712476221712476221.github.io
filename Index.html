@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aramko Global Marketplace</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+    :root { --bg: #1c1c1c; --card: #2a2a2a; --yellow: #ffc107; --text: #ffffff; --gray: #aaaaaa; }
+    * { box-sizing: border-box; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 70px; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+    .logo-area { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 40px; height: 40px; background: var(--yellow); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-weight: bold; color: #000; font-size: 20px; }
+    .logo-text h1 { font-size: 16px; font-weight: 700; }
+    .logo-text p { font-size: 11px; color: var(--gray); }
+    .header-right { display: flex; gap: 10px; }
+    .badge { background: rgba(255, 193, 7, 0.15); color: var(--yellow); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid var(--yellow); }
+    .cart-btn { background: var(--card); border: none; color: var(--text); width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+    .hero { padding: 20px; }
+    .hero h2 { font-size: 24px; line-height: 1.4; margin-bottom: 10px; }
+    .hero p { color: var(--gray); font-size: 14px; margin-bottom: 20px; line-height: 1.6; }
+    .search-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    .search-box { flex: 1; background: var(--card); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 10px; }
+    .search-box input { background: transparent; border: none; color: white; width: 100%; outline: none; font-size: 14px; }
+    .order-btn { background: var(--yellow); color: #000; border: none; padding: 12px 15px; border-radius: 12px; font-weight: bold; font-size: 13px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .features { list-style: none; margin-bottom: 25px; }
+    .features li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); margin-bottom: 10px; }
+    .features li::before { content: '✓'; color: var(--yellow); font-weight: bold; }
+    .disclaimer { background: white; color: #333; padding: 15px; border-radius: 12px; font-size: 11px; text-align: center; line-height: 1.6; margin-bottom: 25px; font-weight: 600; }
+    .categories-title { font-size: 18px; font-weight: 700; margin-bottom: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .category { background: white; border-radius: 15px; padding: 15px 5px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+    .category span { color: #333; font-size: 11px; font-weight: 600; }
+    .cat-icon { width: 35px; height: 35px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 18px; }
+    .bg-blue { background: #e3f2fd; } .bg-orange { background: #fff3e0; } .bg-gray { background: #f5f5f5; } .bg-green { background: #e8f5e9; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #999; font-size: 10px; font-weight: 600; }
+    .nav-item.active { color: var(--yellow); }
+    .nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+    .nav-add { background: var(--yellow); width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #000; font-size: 24px; font-weight: bold; margin-top: -20px; box-shadow: 0 4px 10px rgba(255, 193, 7, 0.4); }
+</style>
+</head>
+<body>
+<header>
+    <div class="logo-area">
+        <div class="logo-icon">A</div>
+        <div class="logo-text">
+            <h1>Aramko Global</h1>
+            <p>Worldwide Marketplace</p>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="badge">0% commission</div>
+        <button class="cart-btn">🛒</button>
+    </div>
+</header>
+<main>
+    <section class="hero">
+        <h2>Everything you need to build and move — from sellers around the world.</h2>
+        <p>Cars, equipment, spare parts, ceramics, building materials, and real estate — in every country.</p>
+        <div class="search-row">
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" placeholder="Search cars, tiles, land,...">
+            </div>
+            <button class="order-btn">
+                <span>Aramko Order...</span>
+                <span>0.5 Pi</span>
+            </button>
+        </div>
+        <ul class="features">
+            <li>0% commission for early sellers</li>
+            <li>Pay securely with your Pi wallet in the app</li>
+            <li>Every country, one global marketplace</li>
+        </ul>
+        <div class="disclaimer">
+            Aramko.pi is a completely independent marketplace. It is NOT affiliated with Saudi Aramco or any of its subsidiaries.<br>
+            أرامكو.pi منصة مستقلة تماماً ولا علاقة لها بشركة أرامكو السعودية.
+        </div>
+        <h3 class="categories-title">Categories</h3>
+        <div class="grid">
+            <div class="category"><div class="cat-icon bg-blue">🚗</div><span>Cars</span></div>
+            <div class="category"><div class="cat-icon bg-orange">🚜</div><span>Heavy...</span></div>
+            <div class="category"><div class="cat-icon bg-gray">⚙️</div><span>Spare Parts</span></div>
+            <div class="category"><div class="cat-icon bg-green">🏠</div><span>Ceramics</span></div>
+            <div class="category"><div class="cat-icon bg-orange">🧱</div><span>Building...</span></div>
+            <div class="category"><div class="cat-icon bg-blue">🏢</div><span>Real Estate</span></div>
+            <div class="category"><div class="cat-icon bg-gray">📦</div><span>Other Prod...</span></div>
+        </div>
+    </section>
+</main>
+<nav class="bottom-nav">
+    <a href="#" class="nav-item active">
+        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Home
+    </a>
+    <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Search
+    </a>
+    <div class="nav-add">+</div>
+    <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Favorites
+    </a>
+    <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg> Profile
+    </a>
+</nav>
+</body>
+</html>
