@@ -33,8 +33,8 @@
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
     .category { background: white; border-radius: 15px; padding: 15px 5px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; cursor: pointer; }
     .category span { color: #333; font-size: 11px; font-weight: 600; }
-    .cat-icon { width: 35px; height: 35px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 18px; }
-    .bg-blue { background: #e3f2fd; } .bg-orange { background: #fff3e0; } .bg-gray { background: #f5f5f5; } .bg-green { background: #e8f5e9; }
+    .cat-icon { width: 35px; height: 35px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 18px; overflow: hidden; padding: 0; }
+    .cat-icon img { width: 100%; height: 100%; object-fit: cover; }
     .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; align-items: center; padding: 10px 0; border-top-left-radius: 20px; border-top-right-radius: 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 100; }
     .nav-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #999; font-size: 10px; font-weight: 600; text-decoration: none; cursor: pointer;}
     .nav-item.active { color: var(--yellow); }
@@ -87,13 +87,34 @@
 
         <h3 class="categories-title">Categories</h3>
         <div class="grid">
-            <div class="category" onclick="showMessage('قسم السيارات قادم قريباً')"><div class="cat-icon bg-blue">🚗</div><span>Cars</span></div>
-            <div class="category" onclick="showMessage('قسم المعدات الثقيلة قادم قريباً')"><div class="cat-icon bg-orange">🚜</div><span>Heavy...</span></div>
-            <div class="category" onclick="showMessage('قسم قطع الغيار قادم قريباً')"><div class="cat-icon bg-gray">⚙️</div><span>Spare Parts</span></div>
-            <div class="category" onclick="showMessage('قسم السيراميك قادم قريباً')"><div class="cat-icon bg-green">🏠</div><span>Ceramics</span></div>
-            <div class="category" onclick="showMessage('قسم مواد البناء قادم قريباً')"><div class="cat-icon bg-orange">🧱</div><span>Building...</span></div>
-            <div class="category" onclick="showMessage('قسم العقارات قادم قريباً')"><div class="cat-icon bg-blue">🏢</div><span>Real Estate</span></div>
-            <div class="category" onclick="showMessage('قسم منتجات أخرى قادم قريباً')"><div class="cat-icon bg-gray">📦</div><span>Other Prod...</span></div>
+            <div class="category" onclick="showMessage('قسم السيارات قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=100&h=100&fit=crop"></div>
+                <span>Cars</span>
+            </div>
+            <div class="category" onclick="showMessage('قسم المعدات الثقيلة قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1579293915924-8027ce3c4761?w=100&h=100&fit=crop"></div>
+                <span>Heavy...</span>
+            </div>
+            <div class="category" onclick="showMessage('قسم قطع الغيار قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=100&h=100&fit=crop"></div>
+                <span>Spare Parts</span>
+            </div>
+            <div class="category" onclick="showMessage('قسم السيراميك قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=100&h=100&fit=crop"></div>
+                <span>Ceramics</span>
+            </div>
+            <div class="category" onclick="showMessage('قسم مواد البناء قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=100&h=100&fit=crop"></div>
+                <span>Building...</span>
+            </div>
+            <div class="category" onclick="showMessage('قسم العقارات قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=100&h=100&fit=crop"></div>
+                <span>Real Estate</span>
+            </div>
+            <div class="category" onclick="showMessage('قسم منتجات أخرى قادم قريباً')">
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=100&h=100&fit=crop"></div>
+                <span>Other Prod...</span>
+            </div>
         </div>
     </section>
 </main>
@@ -115,12 +136,10 @@
 </nav>
 
 <script>
-    // تهيئة مكتبة Pi
     if (window.Pi) {
         Pi.init({ version: "2.0" });
     }
 
-    // دالة تسجيل الدخول
     function loginPi() {
         if (!window.Pi) {
             alert("الرجاء فتح التطبيق داخل متصفح Pi Browser.");
@@ -141,7 +160,6 @@
         console.log("دفعة غير مكتملة", payment);
     }
 
-    // دوال تفاعلية
     function searchProduct() {
         var query = document.getElementById("searchInput").value;
         if (query) {
@@ -155,6 +173,5 @@
         alert(msg);
     }
 </script>
-
 </body>
 </html>
