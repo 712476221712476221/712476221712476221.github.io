@@ -54,7 +54,7 @@
     </div>
     <div class="header-right">
         <button class="badge" onclick="loginPi()">Login with Pi</button>
-        <button class="cart-btn" onclick="showMessage('سلة المشتريات فارغة')">🛒</button>
+        <button class="cart-btn" onclick="buyItem()">🛒</button>
     </div>
 </header>
 
@@ -68,7 +68,7 @@
                 <span>🔍</span>
                 <input type="text" id="searchInput" placeholder="Search cars, tiles, land,...">
             </div>
-            <button class="order-btn" onclick="searchProduct()">
+            <button class="order-btn" onclick="buyItem()">
                 <span>Aramko Order...</span>
                 <span>0.5 Pi</span>
             </button>
@@ -92,7 +92,7 @@
                 <span>Cars</span>
             </div>
             <div class="category" onclick="showMessage('قسم المعدات الثقيلة قادم قريباً')">
-                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1579293915924-8027ce3c4761?w=100&h=100&fit=crop"></div>
+                <div class="cat-icon"><img src="https://images.unsplash.com/photo-1541887053418-19e214c97492?w=100&h=100&fit=crop"></div>
                 <span>Heavy...</span>
             </div>
             <div class="category" onclick="showMessage('قسم قطع الغيار قادم قريباً')">
@@ -136,36 +136,78 @@
 </nav>
 
 <script>
+    // --- رابط خادم Render الخاص بك ---
+    const BACKEND_URL = 'https://aramko-backend-1.onrender.com'; 
+
     if (window.Pi) {
-        Pi.init({ version: "2.0" });
+        Pi.init({ version: "2.0", sandbox: true }); 
     }
 
-    function loginPi() {
+    let userAccessToken = null;
+
+    async function loginPi() {
         if (!window.Pi) {
             alert("الرجاء فتح التطبيق داخل متصفح Pi Browser.");
             return;
         }
         
-        Pi.authenticate(['username', 'payments'], onIncompletePaymentFound)
-            .then(function(auth) {
-                alert("مرحباً بك يا " + auth.user.username + "! تم تسجيل الدخول بنجاح.");
-            })
-            .catch(function(error) {
-                console.error(error);
-                alert("حدث خطأ أثناء تسجيل الدخول. حاول مرة أخرى.");
-            });
+        try {
+            const auth = await Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
+            alert("مرحباً بك يا " + auth.user.username + "!");
+            userAccessToken = auth.accessToken; 
+        } catch (error) {
+            console.error(error);
+            alert("حدث خطأ أثناء تسجيل الدخول.");
+        }
     }
 
     function onIncompletePaymentFound(payment) {
         console.log("دفعة غير مكتملة", payment);
     }
 
-    function searchProduct() {
-        var query = document.getElementById("searchInput").value;
-        if (query) {
-            alert("جاري البحث عن: " + query);
-        } else {
-            alert("الرجاء كتابة شيء للبحث عنه.");
+    async function buyItem() {
+        if (!window.Pi) {
+            alert("الرجاء فتح التطبيق داخل متصفح Pi Browser.");
+            return;
+        }
+
+        if (!userAccessToken) {
+            alert("الرجاء تسجيل الدخول أولاً باستخدام زر Login with Pi في الأعلى.");
+            return;
+        }
+
+        try {
+            Pi.createPayment({
+                amount: 0.5,
+                memo: "شراء منتج من Aramko",
+                metadata: { productId: "123" }
+            }, {
+                onReadyForServerApproval: async (paymentId) => {
+                    const res = await fetch(`${BACKEND_URL}/api/payments/approve`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ paymentId: paymentId })
+                    });
+                    if (!res.ok) throw new Error('Server approval failed');
+                },
+                onReadyForServerCompletion: async (paymentId, txid) => {
+                    const res = await fetch(`${BACKEND_URL}/api/payments/complete`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ paymentId: paymentId, txid: txid })
+                    });
+                    if (res.ok) {
+                        alert("تمت عملية الشراء بنجاح! 🎉");
+                    } else {
+                        alert("فشلت عملية إكمال الدفع.");
+                    }
+                },
+                onCancel: (paymentId) => { console.log('Payment cancelled:', paymentId); },
+                onError: (error, payment) => { console.error('Payment error:', error); }
+            });
+        } catch (error) {
+            console.error(error);
+            alert("حدث خطأ أثناء بدء الدفع.");
         }
     }
 
